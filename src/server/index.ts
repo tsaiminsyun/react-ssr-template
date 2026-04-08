@@ -18,9 +18,10 @@ app.use('/static', express.static(paths.clientBuild))
 app.use(
   webpackDevMiddleware(compiler, {
     publicPath: clientDevConfig.output.publicPath,
+    stats: false,
   })
 )
-app.use(webpackHotMiddleware(compiler))
+app.use(webpackHotMiddleware(compiler, { log: false }))
 
 const manifestPath = path.join(paths.clientBuild, paths.publicPath)
 app.use(

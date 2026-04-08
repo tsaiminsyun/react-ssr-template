@@ -53,5 +53,19 @@ const fileLoaderServer = {
   },
 }
 
-export const clientLoaders = [babelLoader, urlLoaderClient, fileLoaderClient]
-export const loaderServer = [babelLoader, urlLoaderServer, fileLoaderServer]
+const cssLoaderClient = {
+  test: /\.css$/,
+  use: [
+    require.resolve('style-loader'),
+    require.resolve('css-loader'),
+    require.resolve('postcss-loader'),
+  ],
+}
+
+const cssLoaderServer = {
+  test: /\.css$/,
+  use: require.resolve('null-loader'),
+}
+
+export const clientLoaders = [babelLoader, urlLoaderClient, cssLoaderClient, fileLoaderClient]
+export const loaderServer = [babelLoader, urlLoaderServer, cssLoaderServer, fileLoaderServer]
